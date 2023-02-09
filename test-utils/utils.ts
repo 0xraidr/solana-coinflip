@@ -1,6 +1,6 @@
 import * as anchor from "@project-serum/anchor";
 import { Program } from "@project-serum/anchor";
-import { Coinflip } from "../target/types/coinflip";
+import { Coinflip } from "../target/types/coin-flip";
 import { assert } from "chai";
 import * as Token from "@solana/spl-token";
 
