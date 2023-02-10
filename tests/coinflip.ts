@@ -26,6 +26,9 @@ describe("coin-flip", () => {
 
   it("Play!", async () => {
     // Add your test here.
+    const createVault = await utils.createAndFundKeypair(10);
+
+    const treasury = createVault.publicKey;
     try {
       const tx = await program.methods
         .play(0, new BN(1))

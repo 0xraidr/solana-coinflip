@@ -99,7 +99,7 @@ pub struct Bet<'info> {
         init_if_needed,
         payer = player,
         space = 8+8,
-        seeds = ["winning_streak".as_bytes().as_ref(), player.key().as_ref()], bump
+        seeds = [b"winning_streak".as_ref(), player.key().as_ref()], bump
     )]
     pub win_streak: Account<'info,Streak>,
 }
@@ -107,7 +107,7 @@ pub struct Bet<'info> {
 
 #[account]
 pub struct Streak {
-    pub counter: u64,
+    pub counter: u8,
 }
 impl Default for Streak {
     fn default() -> Self {
