@@ -2,13 +2,13 @@
 seeds = false
 skip-lint = false
 [programs.localnet]
-coin_flip = "4QKTSJF4jf8MQfpdtA3SWtjXtdfyrZJr4eapARybVAjG"
+coinflip = "4QKTSJF4jf8MQfpdtA3SWtjXtdfyrZJr4eapARybVAjG"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "Localnet"
 wallet = "/Users/raider/.config/solana/id.json"
 
 [scripts]

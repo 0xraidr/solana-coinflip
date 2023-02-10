@@ -1,7 +1,7 @@
 import * as anchor from "@project-serum/anchor";
 import { Program } from "@project-serum/anchor";
 import { publicKey } from "@project-serum/anchor/dist/cjs/utils";
-import { Coinflip } from "../target/types/coin-flip";
+import { Coinflip } from "../target/types/coinflip";
 import * as utils from "../test-utils/utils";
 import { PublicKey } from "@solana/web3.js";
 import Keypair = anchor.web3.Keypair;
@@ -33,6 +33,7 @@ describe("coin-flip", () => {
           player: provider.publicKey,
           tokenVault: treasury,
           systemProgram: anchor.web3.SystemProgram.programId,
+          winStreak: null,
         })
         .signers([myKeypair])
         .rpc();
