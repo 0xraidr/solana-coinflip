@@ -15,8 +15,7 @@ export interface ProviderWithWallet extends anchor.Provider {
 export const getProvider = anchor.getProvider as () => ProviderWithWallet;
 export const getConnection = () => getProvider().connection;
 export const getMainWallet = () => getProvider().wallet;
-export const getProgram = () =>
-  anchor.workspace.SampleProgram as Program<Coinflip>;
+export const getProgram = () => anchor.workspace.Coinflip as Program<Coinflip>;
 
 const createMint = (decimals: number, authority: Keypair) =>
   Token.createMint(

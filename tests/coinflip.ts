@@ -11,7 +11,7 @@ describe("coin-flip", () => {
   // Configure the client to use the local cluster.
   anchor.setProvider(anchor.AnchorProvider.env());
 
-  const program = anchor.workspace.CoinFlip as Program<Coinflip>;
+  const program = anchor.workspace.Coinflip as Program<Coinflip>;
 
   const provider = utils.getProvider();
 
@@ -22,13 +22,21 @@ describe("coin-flip", () => {
   // i think if i want to use the OG escrow in the programs code i can use this below. instead i just generated a new pubkey for testing.
   // const escrowPda = utils.getOurPda("escrow", signer)[0];
 
-  let treasury = new PublicKey("4VLbHk1ttDLLghMQCdTiZqBouYwPzTUVbMEiaHkskTv6");
+  // let treasury = new PublicKey("4VLbHk1ttDLLghMQCdTiZqBouYwPzTUVbMEiaHkskTv6");
 
   it("Play!", async () => {
     // Add your test here.
     const createVault = await utils.createAndFundKeypair(10);
 
-    const treasury = createVault.publicKey;
+    // const treasury = createVault.publicKey;
+
+    const treasury = await utils.getOurPda("escrow", provider.publicKey)[0];
+
+    const streak = await utils.getOurPda(
+      "winning_streak",
+      provider.publicKey
+    )[0];
+
     try {
       const tx = await program.methods
         .play(0, new BN(1))
@@ -36,7 +44,7 @@ describe("coin-flip", () => {
           player: provider.publicKey,
           tokenVault: treasury,
           systemProgram: anchor.web3.SystemProgram.programId,
-          winStreak: null,
+          winStreak: streak,
         })
         .signers([myKeypair])
         .rpc();
