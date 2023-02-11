@@ -97,3 +97,18 @@ export const createAndFundKeypair = async (
   await connection.confirmTransaction(tx);
   return keypair;
 };
+
+export const fundThatAddress = async (
+  sol: number,
+  targetAddress: PublicKey
+): Promise<anchor.web3.SignatureResult> => {
+  const connection = getConnection();
+  const keypair = Keypair.generate();
+  if (sol == 0) return null;
+  const tx = await connection.requestAirdrop(
+    targetAddress,
+    anchor.web3.LAMPORTS_PER_SOL * sol
+  );
+  const sig = await connection.confirmTransaction(tx);
+  return sig.value;
+};

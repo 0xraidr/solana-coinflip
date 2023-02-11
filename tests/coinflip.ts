@@ -6,6 +6,8 @@ import * as utils from "../test-utils/utils";
 import { PublicKey } from "@solana/web3.js";
 import Keypair = anchor.web3.Keypair;
 import BN = require("bn.js");
+import { Connection } from "@solana/web3.js";
+import * as bs58 from "bs58";
 
 describe("coin-flip", () => {
   // Configure the client to use the local cluster.
@@ -15,29 +17,18 @@ describe("coin-flip", () => {
 
   const provider = utils.getProvider();
 
-  let signer = Keypair.generate();
-
   const myKeypair = provider.wallet.payer as anchor.web3.Keypair;
 
-  // i think if i want to use the OG escrow in the programs code i can use this below. instead i just generated a new pubkey for testing.
-  // const escrowPda = utils.getOurPda("escrow", signer)[0];
-
-  // let treasury = new PublicKey("4VLbHk1ttDLLghMQCdTiZqBouYwPzTUVbMEiaHkskTv6");
-
   it("Play!", async () => {
-    // Add your test here.
-    const createVault = await utils.createAndFundKeypair(10);
+    const treasury = utils.getOurPda("escrow", provider.publicKey)[0];
+    // treasury pubkey = 4oyLCtCD9i7ENVR86kQfv9WQY6tznTzFqFBhGydziNj8
 
-    // const treasury = createVault.publicKey;
+    const streak = utils.getOurPda("winning_streak", provider.publicKey)[0];
 
-    const treasury = await utils.getOurPda("escrow", provider.publicKey)[0];
-
-    const streak = await utils.getOurPda(
-      "winning_streak",
-      provider.publicKey
-    )[0];
+    const fundResult = await utils.fundThatAddress(100, treasury);
 
     try {
+      fundResult;
       const tx = await program.methods
         .play(0, new BN(1))
         .accounts({

@@ -3,7 +3,6 @@ use anchor_lang::system_program::Transfer;
 use crate::system_program::transfer;
 declare_id!("4QKTSJF4jf8MQfpdtA3SWtjXtdfyrZJr4eapARybVAjG");
 
-pub const PROGRAM_FEE_LAMPORTS: u64 = 10000000;
 
 #[program]
 pub mod coinflip {
@@ -32,14 +31,14 @@ pub mod coinflip {
 
         // THIS IS THE BET AMOUNT TRANSFERING TO TOKEN VAULT AKA ESCROW.
 
-        let bet_transfer = CpiContext::new(
+        let bet_deposit = CpiContext::new(
             ctx.accounts.system_program.to_account_info(),
             system_program::Transfer {
                 from: ctx.accounts.player.to_account_info(),
                 to: ctx.accounts.token_vault.to_account_info(),
             },
         );
-        system_program::transfer(bet_transfer, PROGRAM_FEE_LAMPORTS)?;
+        system_program::transfer(bet_deposit, bet_amount)?;
 
         msg!("Player selected {} and bet {}", user_flip_text, user_bet_text);
 
@@ -71,7 +70,7 @@ pub mod coinflip {
             };
 
             transfer(CpiContext::<system_program::Transfer>::new_with_signer(ctx.accounts.system_program.to_account_info(), 
-            accounts, &[&[b"escrow", ctx.accounts.token_vault.key().as_ref(), &[*ctx.bumps.get("escrow").unwrap()]]]), bet_amount * 2)?;
+            accounts, &[&[b"escrow", ctx.accounts.player.key().as_ref(), &[*ctx.bumps.get("token_vault").unwrap()]]]), bet_amount * 2)?;
         
             streak.counter += 1;
         }
