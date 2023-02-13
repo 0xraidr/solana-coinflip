@@ -23,7 +23,7 @@ describe("coin-flip", () => {
 
     const streak = utils.getOurPda("winning_streak", provider.publicKey)[0];
 
-    await utils.fundThatAddress(100, treasury);
+    await utils.fundThatAddress(2, treasury);
 
     try {
       const treasuryBalanceBefore = await utils
@@ -50,6 +50,9 @@ describe("coin-flip", () => {
       console.log(treasuryBalanceAfter);
       console.log(
         "Your transaction signature",
+        // this is when running locally
+        // `https://explorer.solana.com/tx/${tx}?cluster=custom&custom_url=http://localhost:8899`
+        // this is for devnet
         `https://explorer.solana.com/tx/${tx}?cluster=devnet`
       );
     } catch (err) {

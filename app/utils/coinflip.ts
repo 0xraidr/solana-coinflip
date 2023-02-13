@@ -1,0 +1,155 @@
+export type Coinflip = {
+  "version": "0.1.0",
+  "name": "coinflip",
+  "instructions": [
+    {
+      "name": "play",
+      "accounts": [
+        {
+          "name": "player",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "winStreak",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "userFlip",
+          "type": "u8"
+        },
+        {
+          "name": "betAmount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "streak",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "counter",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidFlip",
+      "msg": "Flip must be Heads or Tails (0 or 1)."
+    },
+    {
+      "code": 6001,
+      "name": "InvalidBet",
+      "msg": "Bet must be 1 or 2 SOL."
+    },
+    {
+      "code": 6002,
+      "name": "InvalidFeeDestination",
+      "msg": "Looks like the fee is going to the wrong location!"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidMintAddress",
+      "msg": "The mint address provided is not valid"
+    }
+  ]
+};
+
+export const IDL: Coinflip = {
+  "version": "0.1.0",
+  "name": "coinflip",
+  "instructions": [
+    {
+      "name": "play",
+      "accounts": [
+        {
+          "name": "player",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "winStreak",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "userFlip",
+          "type": "u8"
+        },
+        {
+          "name": "betAmount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "streak",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "counter",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidFlip",
+      "msg": "Flip must be Heads or Tails (0 or 1)."
+    },
+    {
+      "code": 6001,
+      "name": "InvalidBet",
+      "msg": "Bet must be 1 or 2 SOL."
+    },
+    {
+      "code": 6002,
+      "name": "InvalidFeeDestination",
+      "msg": "Looks like the fee is going to the wrong location!"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidMintAddress",
+      "msg": "The mint address provided is not valid"
+    }
+  ]
+};

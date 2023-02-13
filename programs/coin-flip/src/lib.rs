@@ -1,7 +1,7 @@
 use anchor_lang::{prelude::*, system_program};
 use anchor_lang::system_program::Transfer;
 use crate::system_program::transfer;
-declare_id!("4QKTSJF4jf8MQfpdtA3SWtjXtdfyrZJr4eapARybVAjG");
+declare_id!("t8sQWcvrATnFFMLo9Ex96G4e8bNAMW4hW79rx8bdPa7");
 
 
 #[program]

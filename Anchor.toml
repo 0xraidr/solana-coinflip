@@ -1,14 +1,14 @@
 [features]
 seeds = false
 skip-lint = false
-[programs.localnet]
-coinflip = "4QKTSJF4jf8MQfpdtA3SWtjXtdfyrZJr4eapARybVAjG"
+[programs.devnet]
+coinflip = "t8sQWcvrATnFFMLo9Ex96G4e8bNAMW4hW79rx8bdPa7"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "Devnet"
 wallet = "/Users/raider/.config/solana/id.json"
 
 [scripts]
