@@ -77,6 +77,7 @@ pub mod coinflip {
 
         else {
             streak.counter = 0;
+            msg!("Sorry! You Lost!");
         }
         msg!("Winning streak: {}", streak.counter);
      
