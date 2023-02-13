@@ -42,6 +42,7 @@ describe("coin-flip", () => {
         })
         .signers([myKeypair])
         .rpc();
+
       const treasuryBalanceAfter = await utils
         .getConnection()
         .getBalance(treasury);

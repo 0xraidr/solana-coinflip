@@ -28,7 +28,6 @@ pub mod coinflip {
             _ => "Error" //let's add error handle
         }.to_string();
 
-
         // THIS IS THE BET AMOUNT TRANSFERING TO TOKEN VAULT AKA ESCROW.
 
         let bet_deposit = CpiContext::new(
@@ -62,6 +61,7 @@ pub mod coinflip {
         let streak = &mut ctx.accounts.win_streak;
         msg!("Winning streak before: {}", streak.counter);
 
+
         if winner {
             
             let accounts = Transfer {
@@ -77,7 +77,7 @@ pub mod coinflip {
 
         else {
             streak.counter = 0;
-            msg!("Sorry! You Lost!");
+            msg!("Sorry, You Lost!");
         }
         msg!("Winning streak: {}", streak.counter);
      
