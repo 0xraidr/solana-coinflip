@@ -6,8 +6,6 @@ import * as utils from "../test-utils/utils";
 import { PublicKey } from "@solana/web3.js";
 import Keypair = anchor.web3.Keypair;
 import BN = require("bn.js");
-import { Connection } from "@solana/web3.js";
-import * as bs58 from "bs58";
 
 describe("coin-flip", () => {
   // Configure the client to use the local cluster.
@@ -25,10 +23,15 @@ describe("coin-flip", () => {
 
     const streak = utils.getOurPda("winning_streak", provider.publicKey)[0];
 
-    const fundResult = await utils.fundThatAddress(100, treasury);
+    await utils.fundThatAddress(100, treasury);
 
     try {
-      fundResult;
+      const treasuryBalanceBefore = await utils
+        .getConnection()
+        .getBalance(treasury);
+
+      console.log(treasuryBalanceBefore);
+
       const tx = await program.methods
         .play(0, new BN(1))
         .accounts({
@@ -39,6 +42,11 @@ describe("coin-flip", () => {
         })
         .signers([myKeypair])
         .rpc();
+      const treasuryBalanceAfter = await utils
+        .getConnection()
+        .getBalance(treasury);
+
+      console.log(treasuryBalanceAfter);
       console.log(
         "Your transaction signature",
         `https://explorer.solana.com/tx/${tx}?cluster=devnet`
