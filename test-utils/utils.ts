@@ -3,9 +3,11 @@ import { Program } from "@project-serum/anchor";
 import { Coinflip } from "../target/types/coinflip";
 import { assert } from "chai";
 import * as Token from "@solana/spl-token";
-
 import PublicKey = anchor.web3.PublicKey;
 import Keypair = anchor.web3.Keypair;
+// import { publicKey as PublicKey } from "@project-serum/anchor/dist/cjs/utils";
+// const { PublicKey, Keypair } = anchor.web3;
+// import { type Keypair, PublicKey } from "@project-serum/anchor";
 
 // just some helper stuff
 export interface ProviderWithWallet extends anchor.Provider {

@@ -1,10 +1,10 @@
 import { FC } from "react";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
-import CoinSpinner from "../public/coin.gif";
+import CoinPile from "../public/goldcoin.jpeg";
 
 const Loading: FC = () => {
-  return <Image src={CoinSpinner} height={100} alt="Flipping" />;
+  return <Image src={CoinPile} height={100} alt="Flipping" />;
 };
 
 export default Loading;

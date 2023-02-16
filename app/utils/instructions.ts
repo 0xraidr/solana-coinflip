@@ -11,7 +11,7 @@ import {
   getAssociatedTokenAddress,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import * as utils from "../../test-utils/utils";
+// import * as utils from "../../test-utils/utils";
 import BN from "bn.js";
 
 export async function createFlipInstructions(
@@ -31,13 +31,13 @@ export async function createFlipInstructions(
     coinflipProgram.programId
   );
   // This below funds treasure addy during testing.
-  await utils.fundThatAddress(2, treasury);
+  //   await utils.fundThatAddress(2, treasury);
 
-  const treasuryBalanceBefore = await utils
-    .getConnection()
-    .getBalance(treasury);
+  //   const treasuryBalanceBefore = await utils
+  //     .getConnection()
+  //     .getBalance(treasury);
 
-  console.log(treasuryBalanceBefore);
+  //   console.log(treasuryBalanceBefore);
 
   const tx = await coinflipProgram.methods
     .play(flip, new BN(betAmount))
@@ -49,9 +49,9 @@ export async function createFlipInstructions(
     })
     .instruction();
 
-  const treasuryBalanceAfter = await utils.getConnection().getBalance(treasury);
+  //   const treasuryBalanceAfter = await utils.getConnection().getBalance(treasury);
 
-  console.log(treasuryBalanceAfter);
+  //   console.log(treasuryBalanceAfter);
   console.log(
     "Your transaction signature",
     // this is when running locally
