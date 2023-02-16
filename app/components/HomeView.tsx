@@ -34,7 +34,7 @@ export const HomeView: FC = ({}) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Toly Token Flip</title>
+        <title>Coin Flip</title>
         <meta name="description" content="BuildSpace Core 2022 Demo Project" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
