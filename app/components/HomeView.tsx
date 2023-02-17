@@ -2,19 +2,17 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import Head from "next/head";
 import { FC, useEffect, useState } from "react";
-import Template from "../components/ClickTemplate";
 import styles from "../styles/Home.module.css";
 import { getSolBalance } from "../utils/solana";
 import Coinflip from "./Coinflip";
 import Footer from "./Footer";
 import WalletBalances from "./WalletBalances";
-import AirDropSol from "./AirDropSol";
 
 export const HomeView: FC = ({}) => {
   const [solBalance, setSolBalance] = useState<number>(0);
   const [wlBalance, setWlBalance] = useState<number>(0);
   const [refreshSol, refreshSolTrigger] = useState<boolean>(false);
-  const [refreshWl, refreshWlTrigger] = useState<boolean>(false);
+  // const [refreshWl, refreshWlTrigger] = useState<boolean>(false);
 
   const { publicKey, connected } = useWallet();
   const { connection } = useConnection();
@@ -46,19 +44,12 @@ export const HomeView: FC = ({}) => {
           className={styles["wallet-adapter-button-trigger"]}
         />
 
-        {connected && (
-          <WalletBalances solBalance={solBalance} wlBalance={wlBalance} />
-        )}
+        {connected && <WalletBalances solBalance={solBalance} />}
         {connected && (
           <div className={styles.grid}>
-            {solBalance < 0.01 && (
-              <AirDropSol
-                onComplete={() => refreshSolTrigger((prevCheck) => !prevCheck)}
-              />
-            )}
             {solBalance >= 0.01 && (
               <Coinflip
-                onWin={() => refreshWlTrigger((prevCheck) => !prevCheck)}
+                onWin={() => refreshSolTrigger((prevCheck) => !prevCheck)}
               />
             )}
           </div>
