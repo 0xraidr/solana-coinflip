@@ -2,7 +2,6 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import { Transaction } from "@solana/web3.js";
 import { FC, useState } from "react";
-import styles from "../styles/Home.module.css";
 import { createFlipInstructions } from "../utils/instructions";
 import { generateExplorerUrl } from "../utils/solana";
 import { useWorkspace } from "./WorkspaceProvider";
@@ -80,7 +79,6 @@ const Coinflip: FC<FlipCoinPops> = (props: FlipCoinPops) => {
       {!flipStatus && (
         <a
           href="#"
-          className={styles.card}
           onClick={() => {
             return false;
           }}
@@ -126,7 +124,6 @@ const Coinflip: FC<FlipCoinPops> = (props: FlipCoinPops) => {
       {flipStatus && (
         <a
           href="#"
-          className={styles.card}
           onClick={() => {
             setFlipStatus(null);
             return false;

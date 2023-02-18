@@ -2,7 +2,6 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import Head from "next/head";
 import { FC, useEffect, useState } from "react";
-import styles from "../styles/Home.module.css";
 import { getSolBalance } from "../utils/solana";
 import Coinflip from "./Coinflip";
 import Footer from "./Footer";
@@ -10,9 +9,7 @@ import WalletBalances from "./WalletBalances";
 
 export const HomeView: FC = ({}) => {
   const [solBalance, setSolBalance] = useState<number>(0);
-  const [wlBalance, setWlBalance] = useState<number>(0);
   const [refreshSol, refreshSolTrigger] = useState<boolean>(false);
-  // const [refreshWl, refreshWlTrigger] = useState<boolean>(false);
 
   const { publicKey, connected } = useWallet();
   const { connection } = useConnection();
@@ -30,23 +27,22 @@ export const HomeView: FC = ({}) => {
   }, [publicKey, connection, refreshSol]);
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Coin Flip</title>
         <meta name="description" content="BuildSpace Core 2022 Demo Project" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <main>
+        <h1>
           Welcome to <a href="">Coin Flip!</a>
         </h1>
-        <WalletMultiButton
-          className={styles["wallet-adapter-button-trigger"]}
-        />
+        <p className="text: bg-green-700">hellooo</p>
+        <WalletMultiButton />
 
         {connected && <WalletBalances solBalance={solBalance} />}
         {connected && (
-          <div className={styles.grid}>
+          <div>
             {solBalance >= 0.01 && (
               <Coinflip
                 onWin={() => refreshSolTrigger((prevCheck) => !prevCheck)}

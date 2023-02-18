@@ -1,5 +1,4 @@
 import { FC } from "react";
-import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import CoinPile from "../public/goldcoin.jpeg";
 
