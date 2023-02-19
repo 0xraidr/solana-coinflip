@@ -48,9 +48,7 @@ const Coinflip: FC<FlipCoinPops> = (props: FlipCoinPops) => {
       transaction,
       connection
     );
-    /*     let signedTx = await signTransaction(transaction)
-        let signature = await connection.sendTransaction(signedTx);
-        console.log(signature); */
+
     let confirmation = await connection.confirmTransaction({
       signature,
       blockhash: latestBlockhash.blockhash,

@@ -8,7 +8,7 @@ const WalletBalances: FC<WalletBalancesProps> = (
   props: WalletBalancesProps
 ) => {
   return (
-    <p>
+    <p className="text: bg-pink-500">
       Wallet Balance: <code>◎{props.solBalance}</code>
     </p>
   );

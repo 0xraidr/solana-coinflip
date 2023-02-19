@@ -8,7 +8,7 @@ const Footer: FC = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Built by <span>0xraidr</span>
+        Built by <span>///</span>
       </a>
     </footer>
   );

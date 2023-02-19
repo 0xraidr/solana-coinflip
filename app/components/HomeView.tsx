@@ -37,7 +37,7 @@ export const HomeView: FC = ({}) => {
         <h1>
           Welcome to <a href="">Coin Flip!</a>
         </h1>
-        <p className="text: bg-green-700">hellooo</p>
+        <p className="text-3xl text: bg-red-500 font-bold">testing...</p>
         <WalletMultiButton />
 
         {connected && <WalletBalances solBalance={solBalance} />}

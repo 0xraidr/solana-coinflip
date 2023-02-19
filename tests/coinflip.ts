@@ -3,7 +3,7 @@ import { Program } from "@project-serum/anchor";
 import { publicKey } from "@project-serum/anchor/dist/cjs/utils";
 import { Coinflip } from "../target/types/coinflip";
 import * as utils from "../test-utils/utils";
-import { PublicKey } from "@solana/web3.js";
+import { PublicKey, Connection } from "@solana/web3.js";
 import Keypair = anchor.web3.Keypair;
 import BN = require("bn.js");
 
@@ -23,7 +23,7 @@ describe("coin-flip", () => {
 
     const streak = utils.getOurPda("winning_streak", provider.publicKey)[0];
 
-    await utils.fundThatAddress(2, treasury);
+    // await utils.fundThatAddress(2, treasury);
 
     try {
       const treasuryBalanceBefore = await utils
