@@ -9,11 +9,7 @@ pub mod coinflip {
     use super::*;
     
     pub fn play(ctx: Context<Bet>, user_flip: u8, bet_amount: u64) -> Result<()> {
-
-
         // ADDING ERROR HANDLING FOR USERS CHOICE AND BET AMOUNT.
-
-
         require!( user_flip == 0 || user_flip == 1, FlipError::InvalidFlip);
         let user_flip_text = match user_flip {
             0 => "Heads",
@@ -63,7 +59,6 @@ pub mod coinflip {
 
 
         if winner {
-            
             let accounts = Transfer {
                 from: ctx.accounts.token_vault.to_account_info(),
                 to: ctx.accounts.player.to_account_info(),
@@ -74,7 +69,6 @@ pub mod coinflip {
         
             streak.counter += 1;
         }
-
         else {
             streak.counter = 0;
             msg!("Sorry, You Lost!");
@@ -95,6 +89,7 @@ pub struct Bet<'info> {
     pub token_vault: AccountInfo<'info>,
     pub system_program: Program<'info, System>,
 
+
     #[account(
         init_if_needed,
         payer = player,
@@ -102,6 +97,7 @@ pub struct Bet<'info> {
         seeds = [b"winning_streak".as_ref(), player.key().as_ref()], bump
     )]
     pub win_streak: Account<'info,Streak>,
+
 }
 
 

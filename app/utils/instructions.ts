@@ -1,13 +1,15 @@
 import {
   PublicKey,
   SystemProgram,
-  SYSVAR_RENT_PUBKEY,
   TransactionInstruction,
+  Connection,
+  clusterApiUrl,
 } from "@solana/web3.js";
 import { Coinflip } from "./coinflip";
 import { Program } from "@project-serum/anchor";
 // import * as utils from "../../test-utils/utils";
 import BN from "bn.js";
+import { getSolBalance } from "./solana";
 
 export async function createFlipInstructions(
   coinflipProgram: Program<Coinflip>,
@@ -17,14 +19,27 @@ export async function createFlipInstructions(
 ): Promise<TransactionInstruction> {
   // Below finds the address of the PDA for treasury and win streak.
   const [treasury] = PublicKey.findProgramAddressSync(
-    [Buffer.from("escrow")],
+    [Buffer.from("escrow"), userPubkey.toBuffer()],
     coinflipProgram.programId
   );
 
   const [win_streak] = PublicKey.findProgramAddressSync(
-    [Buffer.from("winning_streak")],
+    [Buffer.from("winning_streak"), userPubkey.toBuffer()],
     coinflipProgram.programId
   );
+
+  const connection = new Connection("https://api.devnet.solana.com");
+
+  // (async () => {
+  //   // 1e9 lamports = 10^9 lamports = 1 SOL
+  //   let txhash = await connection.requestAirdrop(treasury, 1e9);
+  let balance = await getSolBalance(connection, treasury);
+
+  //   console.log(`txhash: ${txhash}`);
+  console.log("Treasury Balance", balance);
+
+  //   console.log(treasury);
+  // })();
 
   const tx = await coinflipProgram.methods
     .play(userFlip, new BN(betAmount))
@@ -36,9 +51,6 @@ export async function createFlipInstructions(
     })
     .instruction();
 
-  //   const treasuryBalanceAfter = await utils.getConnection().getBalance(treasury);
-
-  //   console.log(treasuryBalanceAfter);
   console.log(
     "Your transaction signature",
     // this is when running locally
@@ -46,6 +58,5 @@ export async function createFlipInstructions(
     // this is for devnet
     `https://explorer.solana.com/tx/${tx}?cluster=devnet`
   );
-
   return tx;
 }
