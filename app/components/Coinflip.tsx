@@ -1,6 +1,6 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
-import { Transaction } from "@solana/web3.js";
+import { Transaction, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { FC, useState } from "react";
 import { createFlipInstructions } from "../utils/instructions";
 import { generateExplorerUrl } from "../utils/solana";

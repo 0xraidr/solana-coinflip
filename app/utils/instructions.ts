@@ -4,6 +4,7 @@ import {
   TransactionInstruction,
   Connection,
   clusterApiUrl,
+  LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import { Coinflip } from "./coinflip";
 import { Program } from "@project-serum/anchor";
@@ -42,7 +43,7 @@ export async function createFlipInstructions(
   // })();
 
   const tx = await coinflipProgram.methods
-    .play(userFlip, new BN(betAmount))
+    .play(userFlip, new BN(betAmount * LAMPORTS_PER_SOL))
     .accounts({
       player: userPubkey,
       tokenVault: treasury,

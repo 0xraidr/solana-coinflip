@@ -6,6 +6,8 @@ declare_id!("t8sQWcvrATnFFMLo9Ex96G4e8bNAMW4hW79rx8bdPa7");
 
 #[program]
 pub mod coinflip {
+    use anchor_lang::solana_program::native_token::LAMPORTS_PER_SOL;
+
     use super::*;
     
     pub fn play(ctx: Context<Bet>, user_flip: u8, bet_amount: u64) -> Result<()> {
@@ -17,7 +19,7 @@ pub mod coinflip {
             _ => "Error" //let's add error handle
         }.to_string();
 
-        require!( bet_amount == 1 || bet_amount == 2, FlipError::InvalidBet);
+        require!( bet_amount == 1 * LAMPORTS_PER_SOL || bet_amount == 2 * LAMPORTS_PER_SOL, FlipError::InvalidBet);
         let user_bet_text = match bet_amount {
             1 => "1 SOL",
             2 => "2 SOL",

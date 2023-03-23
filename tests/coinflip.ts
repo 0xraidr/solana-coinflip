@@ -3,7 +3,7 @@ import { Program } from "@project-serum/anchor";
 import { publicKey } from "@project-serum/anchor/dist/cjs/utils";
 import { Coinflip } from "../target/types/coinflip";
 import * as utils from "../test-utils/utils";
-import { PublicKey, Connection } from "@solana/web3.js";
+import { PublicKey, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import Keypair = anchor.web3.Keypair;
 import BN = require("bn.js");
 
@@ -33,7 +33,7 @@ describe("coin-flip", () => {
       console.log(treasuryBalanceBefore);
 
       const tx = await program.methods
-        .play(0, new BN(1))
+        .play(0, new BN(1 * LAMPORTS_PER_SOL))
         .accounts({
           player: provider.publicKey,
           tokenVault: treasury,
